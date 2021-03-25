@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{1349E979-080C-4147-A78D-1EF9420DA07B}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="IPCamCapture.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\CaptureBox\CaptureBox.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="IPCamCapture">
+        <MSBuild Projects="IPCamCapture.dproj"/>
+    </Target>
+    <Target Name="IPCamCapture:Clean">
+        <MSBuild Projects="IPCamCapture.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="IPCamCapture:Make">
+        <MSBuild Projects="IPCamCapture.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="CaptureBox">
+        <MSBuild Projects="..\CaptureBox\CaptureBox.dproj"/>
+    </Target>
+    <Target Name="CaptureBox:Clean">
+        <MSBuild Projects="..\CaptureBox\CaptureBox.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CaptureBox:Make">
+        <MSBuild Projects="..\CaptureBox\CaptureBox.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="IPCamCapture;CaptureBox"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="IPCamCapture:Clean;CaptureBox:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="IPCamCapture:Make;CaptureBox:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
